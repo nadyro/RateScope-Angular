@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;background: url("./assets/bg.jpg");
+  background-attachment: fixed;
+  background-position-y: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow-y: scroll;
+}
+.overlay {
+  position: absolute;
+  background-color: rgba(0,0,0,0.3);
+  width: 100%; height: inherit;
+  z-index: 0
+}
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';

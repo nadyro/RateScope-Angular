@@ -1,0 +1,28 @@
+.banner {
+  transform: translateY(-50%) !important;
+  top: 50% !important;
+  position: absolute;
+}
+
+h5 {
+  font-weight: 700;
+  font-size: 48px;
+  color: white;
+}
+p {
+  color: white;
+}
+.button-banner {
+  background-color: transparent;
+  padding: 16px;
+  text-shadow: 0 0 1px black;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: capitalize;
+  color: white !important;
+}
+
+.button-banner:hover {
+  background-color: transparent;
+
+}

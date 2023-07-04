@@ -1,0 +1,160 @@
+<div class="converter-container">
+  <div class="container">
+    <div class="element col-sm-3 col-md-3 col-lg-3"></div>
+    <div class="element col-sm-6 col-md-6 col-lg-6">
+      <form [formGroup]="form">
+        <mat-form-field class="col-sm-8 col-md-5" appearance='outline'>
+          <mat-label>Amount to convert</mat-label>
+
+          <input
+            #input_amount
+            matInput
+            name="input_amount"
+            formControlName="input_amount"
+            [placeholder]="'Amount to convert'"
+            required
+          />
+          <mat-error>{{'Veuillez verifier votre saisie'}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-sm-8 col-md-5" appearance='outline'>
+          <mat-label>Fixed Exchange rate </mat-label>
+
+          <input
+            [value]="form.get('rate')?.value | number"
+            #input_amount
+            matInput
+            name="rate"
+            formControlName="rate"
+            [placeholder]="'Exchange rate'"
+            required
+          />
+          <mat-error>{{'Veuillez verifier votre saisie'}}</mat-error>
+
+        </mat-form-field>
+        <div class="btn-container">
+          <button mat-stroked-button [color]="'primary'" [disabled]="form.invalid" (click)="handleBtnClick()">
+            Calculate
+          </button>
+        </div>
+
+        <div class="btn-container">
+          <ng-container *ngIf="operation.input_currency === CurrencyEnum.EUR">
+            <mat-icon>Euro</mat-icon>
+          </ng-container>
+          <ng-container *ngIf="operation.input_currency === CurrencyEnum.DOLLAR">
+            <mat-icon>attach_money</mat-icon>
+          </ng-container>
+          <button mat-stroked-button [color]="'primary'" [disabled]="form.invalid" (click)="handleChangeCurrency()">
+
+
+            <mat-icon>compare_arrows</mat-icon>
+
+
+          </button>
+          <ng-container *ngIf="operation.current_currency === CurrencyEnum.EUR">
+            <mat-icon>Euro</mat-icon>
+          </ng-container>
+          <ng-container *ngIf="operation.current_currency === CurrencyEnum.DOLLAR">
+            <mat-icon>attach_money</mat-icon>
+          </ng-container>
+        </div>
+        <div class="container">
+          <p>Rate : {{operation.rate}}</p>
+          <p>Fixed Rate : {{operation.fixed_rate}}</p>
+        </div>
+        <div class="container">
+          <p class="d-inline-block">From  <ng-container *ngIf="operation.input_currency === CurrencyEnum.EUR">
+            <mat-icon>Euro</mat-icon>
+          </ng-container>
+            <ng-container *ngIf="operation.input_currency === CurrencyEnum.DOLLAR">
+              <mat-icon>attach_money</mat-icon>
+            </ng-container></p>
+          <p class="d-inline-block">to
+            <ng-container *ngIf="operation.current_currency === CurrencyEnum.EUR">
+              <mat-icon>Euro</mat-icon>
+            </ng-container>
+            <ng-container *ngIf="operation.current_currency === CurrencyEnum.DOLLAR">
+              <mat-icon>attach_money</mat-icon>
+            </ng-container></p>
+        </div>
+        <div class="container">
+          <p>Input Amount : {{operation.input_amount}}</p>
+          <p>Current Amount : {{operation.current_amount}}</p>
+        </div>
+      </form>
+    </div>
+
+    <div class="container">
+      <table
+        mat-table
+        [dataSource]="allOperations"
+      >
+        <ng-container matColumnDef="rate">
+          <th mat-header-cell *matHeaderCellDef>
+            Rate
+          </th>
+          <td mat-cell *matCellDef="let op">
+            {{ op.rate.toString() }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fixed_rate">
+          <th mat-header-cell *matHeaderCellDef>
+            Fixed Rate
+          </th>
+          <td mat-cell *matCellDef="let op">
+            {{ op }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="input_amount">
+          <th mat-header-cell *matHeaderCellDef>
+            Input Amount
+          </th>
+          <td mat-cell *matCellDef="let op">
+            {{ op.input_amount }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="input_currency">
+          <th mat-header-cell *matHeaderCellDef>
+            Input Currency
+          </th>
+          <td mat-cell *matCellDef="let op">
+            {{ op.input_currency }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="current_amount">
+          <th mat-header-cell *matHeaderCellDef>
+            Current Amount
+          </th>
+          <td mat-cell *matCellDef="let op">
+            {{ op.current_amount }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="current_currency">
+          <th mat-header-cell *matHeaderCellDef>
+            Current Currency
+          </th>
+          <td mat-cell *matCellDef="let op">
+            {{ op.current_currency }}
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+<!--      <ng-container *ngFor="let op of allOperations">-->
+<!--        <p>Rate : {{op.rate}}</p>-->
+<!--        <p>Fixed Rate : {{op.fixed_rate}}</p>-->
+<!--        <p>Input Amount : {{op.input_amount}}</p>-->
+<!--        <p>Input Currency : {{op.input_currency}}</p>-->
+<!--        <p>Current Amount : {{op.current_amount}}</p>-->
+<!--        <p>Current Currency : {{op.current_currency}}</p>-->
+<!--      </ng-container>-->
+    </div>
+    <div class="element col-sm-3 col-md-3 col-lg-3"></div>
+  </div>
+</div>
